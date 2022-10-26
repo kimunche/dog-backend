@@ -13,6 +13,6 @@ public class CorsConfig implements WebMvcConfigurer {
 	public void addCorsMappings(CorsRegistry reg) {
 		CorsRegistration cors = reg.addMapping("/**"); // 우리 서버에 들어오는 모든 요청 전부 다
 		cors.allowedOrigins("http://localhost");
-		cors.allowedMethods("GET", "POST");
+		cors.allowedMethods("GET", "POST", "DELETE");
 	}
 }

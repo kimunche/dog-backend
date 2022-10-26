@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE mapper
  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="UserMapper">
- 	<select id="listUsers" resultType="github.kimunche.dog.dto.UserDto">
- 		select
- 			seq,
- 			user_id as userId,
- 			user_email as userEmail
- 		 from users;
- 	</select>
- 	 <!-- <select id="ListDogs" resultType="github.kimunche.dog.dto.PictureDto">
- 		select
- 			seq,
- 			url,
- 			origin
- 		 from pics;
+ <mapper namespace="PictureMapper">
+ 	 <select id="ListDogs" parameterType="int" resultType="github.kimunche.dog.dto.PictureDto">
+ 		SELECT
+			p.*,
+			f.user_ref AS bookmark
+		FROM pics p
+		LEFT JOIN favdog f
+		  ON p.seq = f.pic_ref
+		     AND
+			   f.user_ref = #{userSeq}
+		ORDER BY p.seq
  	</select>
  	
  	<insert id="insertPicture" parameterType="github.kimunche.dog.dto.PictureDto">
@@ -39,5 +36,18 @@
  	FROM pics 
  	WHERE seq =#{seq}
  	</select>
- 	 -->
+ 	<insert id="insertBookmark" parameterType="map">
+	 	INSERT INTO favdog(
+	 		user_ref
+	 		, pic_ref
+	 	) VALUES (
+	 		#{userSeq},
+	 		#{picSeq}
+	 	)
+ 	</insert>
+ 	<delete id="removeBookmark" parameterType="map">
+ 	DELETE FROM favdog
+ 	WHERE user_ref= #{userSeq}
+ 	AND pic_ref = #{picSeq}
+ 	</delete>
  </mapper>

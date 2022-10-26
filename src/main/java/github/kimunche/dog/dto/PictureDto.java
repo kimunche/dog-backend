@@ -7,6 +7,7 @@ public class PictureDto {
 	String url;
 	String origin;
 	
+	
 	public Integer getSeq() {
 		return seq;
 	}
@@ -24,6 +25,12 @@ public class PictureDto {
 	}
 	public void setOrigin(String origin) {
 		this.origin = origin;
+	}
+	public Boolean getBookmark() {
+		return bookmark;
+	}
+	public void setBookmark(Boolean bookmark) {
+		this.bookmark = bookmark;
 	}
 	@Override
 	public String toString() {

@@ -17,7 +17,6 @@ public class UserController {
 	@GetMapping("/api/users")
 	public Object listUsers() {
 		// /api/users
-		
 		return userService.listUsers();
 	}
 }
