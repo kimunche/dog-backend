@@ -53,4 +53,19 @@ public class PicturDao {
 			);
 		return session.delete("PictureMapper.removeBookmark", param);
 	}
+
+	public String checkBookmark(Integer userSeq, Integer picSeq) {
+		Map<String, Object> param =Param.make(
+				"userSeq", userSeq,
+				"picSeq", picSeq
+			);
+		return session.selectOne("PictureMapper.checkBookmark", param);
+	}
+
+	public List<PictureDto> findBookmarks(Integer fakeuserseq) {
+		
+		return session.selectList("PictureMapper.findBookmarks", fakeuserseq);
+	}
+
+	
 }

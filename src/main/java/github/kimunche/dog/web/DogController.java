@@ -60,4 +60,10 @@ public class DogController {
 		boolean success = dogService.removeBookmark(fakeUserSeq, picSeq);
 		return success; // true or false
 	}
+	
+	@GetMapping("/api/dog/bookmarks")
+	public List<PictureDto> loadBookmarks(){
+		// FIXME bookmark 속성이 PictureDto 안에 있어야 함!
+		return dogService.findBookmarks(fakeUserSeq);
+	}
 }

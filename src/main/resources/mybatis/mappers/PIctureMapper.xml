@@ -50,4 +50,14 @@
  	WHERE user_ref= #{userSeq}
  	AND pic_ref = #{picSeq}
  	</delete>
+ 	
+ 	<select id="findBookmarks" parameterType="int" resultType="github.kimunche.dog.dto.PictureDto">
+ 	SELECT
+		P.*
+	FROM favdog fd 
+	INNER JOIN pics p
+	  ON fd.pic_ref = p.seq
+	WHERE
+		fd.user_ref = #{seq}
+ 	</select>
  </mapper>

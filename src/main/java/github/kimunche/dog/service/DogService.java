@@ -55,8 +55,14 @@ public class DogService {
 			// throw new RuntimeException("no such picture");
 		}
 		// 2. validation - (userSeq, picSeq)가 이미 있는 경우 확인해야함
-		// FIXME: 이거 일주일동안 해봄
-		
+		// String chk = pictureDao.checkBookmark(userSeq, picSeq);
+		/** 급할때는 이렇게 구현해도 됨 */
+		List<PictureDto> pics =  pictureDao.findBookmarks(userSeq);
+		for (PictureDto p : pics) {
+			if(p.getSeq().equals(pics)) {
+				throw new RuntimeException("ALREADY_BOOKMARKED");
+			}
+		}
 		int cnt = pictureDao.addBookmark(userSeq, picSeq);
 		return cnt == 1;
 	}
@@ -67,6 +73,11 @@ public class DogService {
 		// 1.2. 북마크가 있는지
 		
 		return 1 == pictureDao.removeBookmark(userSeq, picSeq);
+	}
+
+	public List<PictureDto> findBookmarks(Integer fakeuserseq) {
+		
+		return pictureDao.findBookmarks(fakeuserseq);
 	}
 
 }
