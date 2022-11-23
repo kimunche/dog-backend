@@ -36,6 +36,7 @@
  	FROM pics 
  	WHERE seq =#{seq}
  	</select>
+ 	<!-- 뭐냐? -->
  	<insert id="insertBookmark" parameterType="map">
 	 	INSERT INTO favdog(
 	 		user_ref
