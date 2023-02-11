@@ -2,6 +2,19 @@
  <!DOCTYPE mapper
  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="UserMapper">
+ 
+ 	<select id="login"
+ 		parameterType="github.kimunche.dog.dto.LoginDto"
+ 		resultType="github.kimunche.dog.dto.UserDto">
+ 		select
+ 			seq,
+ 			user_id as userId ,
+ 			user_email as userEmail
+ 		from users
+ 		where user_id = #{userId}
+ 		and user_pass  = #{pass}
+ 	</select>
+ 	
  	<select id="listUsers" resultType="github.kimunche.dog.dto.UserDto">
  		select
  			seq,
@@ -9,6 +22,29 @@
  			user_email as userEmail
  		 from users;
  	</select>
+ 	
+ 	<select id="findById" resultType="github.kimunche.dog.dto.UserDto">
+ 		select
+ 			seq,
+ 			user_id as userId ,
+ 			user_email as userEmail
+ 		from users
+ 		where user_id = #{userId}
+ 	</select>
+ 	
+ 	<insert id="insertUser"
+ 		parameterType="github.kimunche.dog.dto.UserDto"
+ 		 useGeneratedKeys="true"
+ 		 keyProperty="seq"
+ 		 keyColumn="seq">
+ 		INSERT INTO users (user_id, user_email
+ 		) VALUES (
+ 			#{userId}, #{userEmail});
+ 	</insert>
+ 	<delete id="deleteUser" parameterType="github.kimunche.dog.dto.UserDto">
+ 	DELETE FROM users
+ 	where user_id = #{userId}
+ 	</delete>
  	 <!-- <select id="ListDogs" resultType="github.kimunche.dog.dto.PictureDto">
  		select
  			seq,
